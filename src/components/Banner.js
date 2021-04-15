@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 const Banner = () => {
   return (
     <section className="container-area bg-color h-min-nav max-h-screen grid grid-cols-1 md:grid-cols-2 gap-5 place-items-center ">
+      {/* left portion */}
       <div>
         <h1 className="text-5xl uppercase font-bold w-full xl:w-2/3 font-passion-one tracking-wide text-green-400">
           We Capture Your Memorable Moment
@@ -27,6 +28,7 @@ const Banner = () => {
           Book Now
         </Link>
       </div>
+      {/* right portion */}
       <div>
         <img src="https://i.postimg.cc/nrRkfkYL/bannerimage.png" alt="bride" />
       </div>

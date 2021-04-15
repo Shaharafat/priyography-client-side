@@ -12,6 +12,7 @@ import { LOADING_END, LOADING_START } from './constants';
 // initial states
 export const initialState = {
   loading: true,
+  user: null,
 };
 
 // reducer function. this will be passed in useReducer.
