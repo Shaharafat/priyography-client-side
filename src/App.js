@@ -1,7 +1,16 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import { Home } from './pages';
 
 function App() {
-  return <div className="App bg-red-300 ">Hello</div>;
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" component={Home} />
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
