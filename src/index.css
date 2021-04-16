@@ -14,11 +14,20 @@ body {
   background: #273c75;
 }
 
+.bg-font {
+  color: #192a56;
+}
+
+.fr-font {
+  color: #273c75;
+}
+
 .nav-link-styles {
   @apply text-base text-green-300 font-semibold block md:inline-block px-3 py-4 md:py-2 md:rounded-lg;
 }
 
-.nav-link-styles:hover {
+.nav-link-styles:hover,
+.dashboard-link:hover {
   background: #273c75;
 }
 

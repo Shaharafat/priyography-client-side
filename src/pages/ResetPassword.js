@@ -7,12 +7,11 @@
  *
  */
 import React from 'react';
-import { Navbar, ResetPasswordForm } from '../components';
+import { ResetPasswordForm } from '../components';
 
 const ResetPassword = () => {
   return (
     <div>
-      <Navbar />
       <ResetPasswordForm />
     </div>
   );

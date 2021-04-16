@@ -7,12 +7,11 @@
  *
  */
 import React from 'react';
-import { Navbar, SignupForm } from '../components';
+import { SignupForm } from '../components';
 
 const Signup = () => {
   return (
     <div>
-      <Navbar />
       <SignupForm />
     </div>
   );

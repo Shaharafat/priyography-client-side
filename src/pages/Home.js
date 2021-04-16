@@ -7,12 +7,11 @@
  *
  */
 import React from 'react';
-import { Banner, Navbar } from '../components';
+import { Banner } from '../components';
 
 const Home = () => {
   return (
     <div>
-      <Navbar />
       <Banner />
     </div>
   );
