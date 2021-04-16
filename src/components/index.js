@@ -10,6 +10,8 @@ import UserList from './UserList';
 import OrderList from './OrderList';
 import AddService from './AddService';
 import ManageServices from './ManageServices';
+import AddServiceForm from './AddServiceForm';
+import WriteReviewForm from './WriteReviewForm';
 
 export {
   Navbar,
@@ -24,4 +26,6 @@ export {
   OrderList,
   AddService,
   ManageServices,
+  AddServiceForm,
+  WriteReviewForm,
 };

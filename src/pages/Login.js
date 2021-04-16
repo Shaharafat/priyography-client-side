@@ -7,11 +7,12 @@
  *
  */
 import React from 'react';
-import { LoginFrom } from '../components';
+import { LoginFrom, Navbar } from '../components';
 
 const Login = () => {
   return (
     <div>
+      <Navbar />
       <LoginFrom />
     </div>
   );

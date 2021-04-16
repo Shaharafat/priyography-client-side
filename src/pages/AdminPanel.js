@@ -10,7 +10,7 @@ import React from 'react';
 
 const AdminPanel = () => {
   return (
-    <div className="h-min-nav grid place-items-center fr-color">
+    <div className="min-h-screen grid place-items-center fr-color">
       <h1 className="text-2xl bg-font font-bold">Admin</h1>
     </div>
   );

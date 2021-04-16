@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { Navbar } from './components';
 import {
   AdminDashboard,
   CustomerDashboard,
@@ -11,12 +10,10 @@ import {
   ResetPassword,
   Signup,
 } from './pages';
-
 function App() {
   return (
     // <StoreProvider>
     <Router>
-      <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" component={Login} />

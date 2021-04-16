@@ -7,12 +7,12 @@
  *
  */
 import React from 'react';
-import { FaBorderNone, FaDelicious, FaListUl, FaPlus, FaUsers } from 'react-icons/fa';
+import { FaBorderNone, FaDelicious, FaHome, FaListUl, FaPlus, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const AdminDashboardNav = () => {
   return (
-    <nav className=" w-max h-min-nav bg-color shadow-2xl">
+    <nav className="w-max min-h-screen bg-color shadow-2xl">
       {/* sidebar */}
       <ul>
         <li className="mx-1">
@@ -55,6 +55,12 @@ const AdminDashboardNav = () => {
           >
             <FaBorderNone className="inline-block mr-2" />
             Manage Services
+          </Link>
+        </li>
+        <li className="mx-1">
+          <Link to={`/`} className="text-green-300 w-full px-2 py-3 block dashboard-link ">
+            <FaHome className="inline-block mr-2" />
+            Home
           </Link>
         </li>
       </ul>

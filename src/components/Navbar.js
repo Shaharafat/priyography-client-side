@@ -26,7 +26,7 @@ const Navbar = () => {
         id="nav-main"
       >
         <li className="mx-2">
-          <Link to="#" className="nav-link-styles font-montserrat">
+          <Link to="/" className="nav-link-styles font-montserrat">
             Home
           </Link>
         </li>

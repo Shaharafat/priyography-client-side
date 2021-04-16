@@ -53,3 +53,16 @@ export const resetPasswordSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Password must match')
     .required(),
 });
+
+// schema for add service form
+export const addServiceFormSchema = yup.object().shape({
+  name: yup.string().min(5).max(50).required(),
+  price: yup.number().min(5, 'Minimum price is 5$').required('Price is required'),
+  serviceDetails: yup.string().required('Must type a feature'),
+});
+
+// schema for review form
+export const writeReviewFormSchema = yup.object().shape({
+  reviewText: yup.string().min(20).max(120).required(),
+  stars: yup.number().min(1).max(5).required(),
+});

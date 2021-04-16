@@ -7,11 +7,12 @@
  *
  */
 import React from 'react';
-import { ForgotPasswordForm } from '../components';
+import { ForgotPasswordForm, Navbar } from '../components';
 
 const ForgotPassword = () => {
   return (
     <div>
+      <Navbar />
       <ForgotPasswordForm />
     </div>
   );

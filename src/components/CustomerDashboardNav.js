@@ -7,7 +7,7 @@
  *
  */
 import React from 'react';
-import { FaRegCommentAlt, FaShoppingCart } from 'react-icons/fa';
+import { FaRegCommentAlt, FaShoppingCart, FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const CustomerDashboardNav = () => {
@@ -31,6 +31,12 @@ const CustomerDashboardNav = () => {
           >
             <FaRegCommentAlt className="inline-block mr-2" />
             Write a Review
+          </Link>
+        </li>
+        <li className="mx-1">
+          <Link to={`/`} className="text-green-300 w-full pl-2 py-3 block dashboard-link ">
+            <FaHome className="inline-block mr-2" />
+            Home
           </Link>
         </li>
       </ul>
