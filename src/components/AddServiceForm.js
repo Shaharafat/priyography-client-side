@@ -13,6 +13,8 @@ import { useForm } from 'react-hook-form';
 import { FaImage, FaPlus } from 'react-icons/fa';
 import { ResponseMessageBox } from '.';
 import { addServiceFormSchema } from '../helpers/schemas';
+import { updateStoreWithNewService } from '../store/actions';
+import { useStore } from '../store/Store';
 
 const AddServiceForm = () => {
   const [fileName, setFileName] = useState('No file choosen.');
@@ -20,14 +22,15 @@ const AddServiceForm = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [imageUploadStatus, setImageUploadStatus] = useState('');
+  const { state, dispatch } = useStore();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    resolver: yupResolver(addServiceFormSchema),
+    resolver: yupResolver(addServiceFormSchema)
   });
 
   // submit and add service
@@ -43,17 +46,19 @@ const AddServiceForm = () => {
           name,
           price,
           imageUrl,
-          serviceDetails: facilities,
+          serviceDetails: facilities
         },
         {
-          headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') }
         }
       );
 
-      const { success, message } = response.data;
+      const { success, message, service } = response.data;
       if (success) {
         // success message from server
         setSuccessMessage(message);
+        // update Store
+        updateStoreWithNewService(service, state, dispatch);
       }
     } catch (error) {
       // error message from server
@@ -84,17 +89,17 @@ const AddServiceForm = () => {
         const response = await axios.post(
           '/services/uploadImage',
           {
-            imageBlob,
+            imageBlob
           },
           {
-            headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+            headers: { x_auth_token: localStorage.getItem('x_auth_token') }
           }
         );
 
         const {
           success,
           message,
-          response: { public_id },
+          response: { public_id }
         } = response.data;
 
         // set status and image url

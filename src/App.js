@@ -8,7 +8,7 @@ import {
   Home,
   Login,
   ResetPassword,
-  Signup,
+  Signup
 } from './pages';
 import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from './routes/PrivateRoute';

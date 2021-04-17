@@ -13,18 +13,21 @@ import { useForm } from 'react-hook-form';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { ResponseMessageBox } from '.';
 import { writeReviewFormSchema } from '../helpers/schemas';
+import { updateStoreWithNewReview } from '../store/actions';
+import { useStore } from '../store/Store';
 
 const WriteReviewForm = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { state, dispatch } = useStore();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    resolver: yupResolver(writeReviewFormSchema),
+    resolver: yupResolver(writeReviewFormSchema)
   });
 
   // execute when form submits
@@ -36,17 +39,19 @@ const WriteReviewForm = () => {
         '/reviews/add',
         {
           reviewText,
-          stars,
+          stars
         },
         {
-          headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') }
         }
       );
-      const { success, message } = response.data;
+      const { success, message, review } = response.data;
 
       if (success) {
         // success message from server
         setSuccessMessage(message);
+        // update store
+        updateStoreWithNewReview(review, state, dispatch);
       }
     } catch (error) {
       // error message from server

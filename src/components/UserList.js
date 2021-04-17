@@ -22,7 +22,7 @@ const UserList = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get('/users', {
-        headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+        headers: { x_auth_token: localStorage.getItem('x_auth_token') }
       });
 
       const { success, users } = response.data;

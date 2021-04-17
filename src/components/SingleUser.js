@@ -29,10 +29,10 @@ const SingleUser = ({ user, setSuccess, setError }) => {
       const response = await axios.patch(
         `/users/updateRole/${id}`,
         {
-          role,
+          role
         },
         {
-          headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') }
         }
       );
 

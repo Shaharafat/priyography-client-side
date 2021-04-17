@@ -43,7 +43,7 @@ export const StoreProvider = ({ children }) => {
 
   const storeValue = {
     state,
-    dispatch,
+    dispatch
   };
 
   return (

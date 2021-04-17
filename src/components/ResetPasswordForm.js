@@ -16,10 +16,10 @@ const ResetPasswordForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    resolver: yupResolver(resetPasswordSchema),
+    resolver: yupResolver(resetPasswordSchema)
   });
 
   // handle submit

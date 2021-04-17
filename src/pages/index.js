@@ -21,5 +21,5 @@ export {
   Orders,
   WriteReview,
   Dashboard,
-  AdminPanel,
+  AdminPanel
 };

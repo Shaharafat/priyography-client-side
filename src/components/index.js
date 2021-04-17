@@ -11,9 +11,13 @@ import OrderList from './OrderList';
 import ResetPasswordForm from './ResetPasswordForm';
 import ResponseMessageBox from './ResponseMessageBox';
 import SignupForm from './SignupForm';
+import SingleOrder from './SingleOrder';
+import SingleService from './SingleService';
+import SingleServiceDashboard from './SingleServiceDashboard';
+import SingleUser from './SingleUser';
+import SingleUserOrder from './SingleUserOrder';
 import UserList from './UserList';
 import WriteReviewForm from './WriteReviewForm';
-import SingleUser from './SingleUser';
 
 export {
   Navbar,
@@ -32,4 +36,8 @@ export {
   WriteReviewForm,
   ResponseMessageBox,
   SingleUser,
+  SingleOrder,
+  SingleService,
+  SingleServiceDashboard,
+  SingleUserOrder
 };

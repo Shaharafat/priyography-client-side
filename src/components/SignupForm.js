@@ -27,10 +27,10 @@ const SignupForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    resolver: yupResolver(signupSchema),
+    resolver: yupResolver(signupSchema)
   });
 
   const submitSignupForm = async (data) => {
@@ -43,7 +43,7 @@ const SignupForm = () => {
         lastName,
         username,
         email,
-        password,
+        password
       });
       // if success get token
       const { success, token } = response.data;

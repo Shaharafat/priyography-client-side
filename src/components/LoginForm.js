@@ -29,10 +29,10 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(loginSchema)
   });
 
   const submitLoginForm = async (data) => {

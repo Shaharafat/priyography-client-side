@@ -17,10 +17,10 @@ const ForgotPasswordForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     mode: 'onTouched',
-    resolver: yupResolver(forgotPasswordSchema),
+    resolver: yupResolver(forgotPasswordSchema)
   });
 
   const submit = () => {
