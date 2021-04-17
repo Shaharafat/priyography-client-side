@@ -13,6 +13,7 @@ import ResponseMessageBox from './ResponseMessageBox';
 import SignupForm from './SignupForm';
 import UserList from './UserList';
 import WriteReviewForm from './WriteReviewForm';
+import SingleUser from './SingleUser';
 
 export {
   Navbar,
@@ -30,4 +31,5 @@ export {
   AddServiceForm,
   WriteReviewForm,
   ResponseMessageBox,
+  SingleUser,
 };

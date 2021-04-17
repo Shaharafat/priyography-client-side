@@ -57,7 +57,7 @@ const WriteReviewForm = () => {
   return (
     <div className="p-4 bg-color rounded-md shadow-xl mt-3">
       <h2 className="text-gray-100 text-xl">Review Details</h2>
-      {/* success and error messag */}
+      {/* success and error message */}
       {successMessage && (
         <ResponseMessageBox isSuccess={true} message={successMessage} handler={setSuccessMessage} />
       )}

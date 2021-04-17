@@ -14,7 +14,7 @@ import AdminRoute from '../routes/AdminRoute';
 
 const AdminDashboard = () => {
   return (
-    <div className="flex">
+    <div className="flex relative">
       <AdminDashboardNav />
       <div className="flex-grow">
         <Switch>

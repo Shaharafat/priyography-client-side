@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const AdminDashboardNav = () => {
   return (
-    <nav className="w-max min-h-screen bg-color shadow-2xl">
+    <nav className="w-max min-h-screen max-h-screen bg-color shadow-2xl sticky top-0">
       {/* sidebar */}
       <ul>
         <li className="mx-1">
