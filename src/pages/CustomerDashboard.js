@@ -7,9 +7,10 @@
  *
  */
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { Dashboard, Orders, WriteReview } from '.';
 import { CustomerDashboardNav } from '../components';
+import PrivateRoute from '../routes/PrivateRoute';
 
 const CustomerDashboard = () => {
   return (
@@ -17,9 +18,9 @@ const CustomerDashboard = () => {
       <CustomerDashboardNav />
       <div className="flex-grow">
         <Switch>
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path={`/dashboard/orders`} component={Orders} />
-          <Route path={`/dashboard/writeReview`} component={WriteReview} />
+          <PrivateRoute path="/dashboard" exact component={Dashboard} />
+          <PrivateRoute path={`/dashboard/orders`} component={Orders} />
+          <PrivateRoute path={`/dashboard/writeReview`} component={WriteReview} />
         </Switch>
       </div>
     </div>

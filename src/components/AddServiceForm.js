@@ -7,13 +7,20 @@
  *
  */
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaImage, FaPlus } from 'react-icons/fa';
+import { ResponseMessageBox } from '.';
 import { addServiceFormSchema } from '../helpers/schemas';
 
 const AddServiceForm = () => {
   const [fileName, setFileName] = useState('No file choosen.');
+  const [imageUrl, setImageUrl] = useState('fsdf'); // to store image public id
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [imageUploadStatus, setImageUploadStatus] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -23,11 +30,41 @@ const AddServiceForm = () => {
     resolver: yupResolver(addServiceFormSchema),
   });
 
-  const submit = (data) => {
-    console.log(data);
+  // submit and add service
+  const submit = async (data) => {
+    const { name, price, serviceDetails } = data;
+    const facilities = serviceDetails.split(',');
+
+    // axios request
+    try {
+      const response = await axios.post(
+        '/services/addService',
+        {
+          name,
+          price,
+          imageUrl,
+          serviceDetails: facilities,
+        },
+        {
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+        }
+      );
+
+      const { success, message } = response.data;
+      if (success) {
+        // success message from server
+        setSuccessMessage(message);
+      }
+    } catch (error) {
+      // error message from server
+      setErrorMessage(error.response?.data?.message);
+    }
   };
 
+  // upload image on file field change
   const uploadImage = (event) => {
+    setImageUploadStatus('Uploading...');
+
     const file = event.target.files[0];
     // set file name
     setFileName(file.name);
@@ -35,19 +72,52 @@ const AddServiceForm = () => {
     createBlob(file);
   };
 
+  // create image blob
   const createBlob = (file) => {
     // create reader
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => {
+    reader.onload = async () => {
+      const imageBlob = reader.result;
       // will goto cloudinary from here.
-      console.log(reader.result);
+      try {
+        const response = await axios.post(
+          '/services/uploadImage',
+          {
+            imageBlob,
+          },
+          {
+            headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+          }
+        );
+
+        const {
+          success,
+          message,
+          response: { public_id },
+        } = response.data;
+
+        // set status and image url
+        if (success) {
+          setImageUploadStatus(message);
+          setImageUrl(public_id);
+        }
+      } catch (error) {
+        setImageUploadStatus(error?.response?.data?.message);
+      }
     };
   };
 
   return (
     <div className="p-4 bg-color rounded-md shadow-xl mt-3">
       <h2 className="text-gray-100 text-xl">Service Details</h2>
+      {/* success and error messag */}
+      {successMessage && (
+        <ResponseMessageBox isSuccess={true} message={successMessage} handler={setSuccessMessage} />
+      )}
+      {errorMessage && (
+        <ResponseMessageBox isSuccess={false} message={errorMessage} handler={setErrorMessage} />
+      )}
 
       <form className="mt-3" onSubmit={handleSubmit(submit)}>
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
@@ -107,10 +177,14 @@ const AddServiceForm = () => {
               </label>
               <p className="text-gray-100 md:mt-6">{fileName}</p>
             </div>
+            {imageUploadStatus && <small className="text-green-300">{imageUploadStatus}</small>}
             <input type="file" id="image" onChange={uploadImage} hidden />
           </div>
         </div>
-        <button className="bg-green-400 hover:bg-green-500 mt-6 py-2 px-3 flex items-center text-white">
+        <button
+          className="bg-green-400 hover:bg-green-500 mt-6 py-2 px-3 flex items-center text-white disabled:opacity-10"
+          disabled={!imageUrl}
+        >
           {' '}
           <FaPlus className="inline-block mr-2" /> Submit
         </button>

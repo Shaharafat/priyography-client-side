@@ -7,12 +7,17 @@
  *
  */
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaRegCommentAlt } from 'react-icons/fa';
+import { ResponseMessageBox } from '.';
 import { writeReviewFormSchema } from '../helpers/schemas';
 
 const WriteReviewForm = () => {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -23,15 +28,43 @@ const WriteReviewForm = () => {
   });
 
   // execute when form submits
-  const submit = (data) => {
-    console.log(data);
-    console.log('submit');
+  const submit = async (data) => {
+    const { reviewText, stars } = data;
+
+    try {
+      const response = await axios.post(
+        '/reviews/add',
+        {
+          reviewText,
+          stars,
+        },
+        {
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+        }
+      );
+      const { success, message } = response.data;
+
+      if (success) {
+        // success message from server
+        setSuccessMessage(message);
+      }
+    } catch (error) {
+      // error message from server
+      setErrorMessage(error.response?.data?.message);
+    }
   };
 
   return (
     <div className="p-4 bg-color rounded-md shadow-xl mt-3">
       <h2 className="text-gray-100 text-xl">Review Details</h2>
-
+      {/* success and error messag */}
+      {successMessage && (
+        <ResponseMessageBox isSuccess={true} message={successMessage} handler={setSuccessMessage} />
+      )}
+      {errorMessage && (
+        <ResponseMessageBox isSuccess={false} message={errorMessage} handler={setErrorMessage} />
+      )}
+      {/* main form */}
       <form className="mt-3" onSubmit={handleSubmit(submit)}>
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
           <div>
@@ -70,7 +103,6 @@ const WriteReviewForm = () => {
           type="submit"
           className="bg-green-400 hover:bg-green-500 mt-6 py-2 px-3 flex items-center text-white"
         >
-          {' '}
           <FaRegCommentAlt className="inline-block mr-2" /> Submit Review
         </button>
       </form>

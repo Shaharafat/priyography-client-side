@@ -7,12 +7,24 @@
  *
  */
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { ResponseMessageBox } from '.';
 import { loginSchema } from '../helpers/schemas';
+import { SIGNIN_USER } from '../store/constants';
+import { useStore } from '../store/Store';
 
 const LoginForm = () => {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const { dispatch } = useStore();
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: '/' } };
+
   // setting up yup
   const {
     register,
@@ -23,14 +35,50 @@ const LoginForm = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const submitLoginForm = () => {
-    console.log('submitted');
+  const submitLoginForm = async (data) => {
+    const { email, password } = data;
+    // try login
+    try {
+      const response = await axios.post('/users/login', { email, password });
+      const { success, token } = response.data;
+      if (success) {
+        // show success message
+        setSuccessMessage('Login Successful.');
+        // set token to local storage
+        localStorage.setItem('x_auth_token', 'Bearer' + ' ' + token);
+        // get user data and set to state
+        const { user } = jwt_decode(token);
+        dispatch({ type: SIGNIN_USER, payload: { user } });
+
+        // if admin send to admin panel otherwise from state.
+        if (user.role === 'admin') {
+          history.replace('/admin');
+        } else {
+          history.replace(from);
+        }
+      }
+    } catch (error) {
+      // show error message
+      setErrorMessage(error.response?.data?.message);
+    }
   };
 
   return (
     <div className="h-min-nav container-area grid place-items-center bg-color">
       <div className="fr-color w-full md:w-2/3 lg:w-1/3 p-3 rounded-md">
-        <h1 className="text-green-300 font-montserrat text-2xl font-bold">Login</h1>
+        <h1 className="text-green-300 font-montserrat text-2xl font-bold mb-2">Login</h1>
+        {/* success message */}
+        {successMessage && (
+          <ResponseMessageBox
+            isSuccess={true}
+            message={successMessage}
+            handler={setSuccessMessage}
+          />
+        )}
+        {/* error message */}
+        {errorMessage && (
+          <ResponseMessageBox isSuccess={false} message={errorMessage} handler={setErrorMessage} />
+        )}
         <form className="mt-6" onSubmit={handleSubmit(submitLoginForm)}>
           {/* email */}
           <div>
@@ -42,6 +90,7 @@ const LoginForm = () => {
               id="email"
               placeholder="Type your email"
               className="bg-color pl-1 w-full py-3 mt-2 text-gray-100"
+              autoComplete="on"
               {...register('email')}
             />
             <p className="text-sm text-red-500 mt-1">{errors.email?.message}</p>
@@ -56,6 +105,7 @@ const LoginForm = () => {
               id="pass"
               placeholder="Type your password"
               className="bg-color pl-1 w-full py-3 mt-2 text-gray-100"
+              autoComplete="on"
               {...register('password')}
             />
             <p className="text-sm text-red-500 mt-1">{errors.password?.message}</p>

@@ -7,11 +7,21 @@
  *
  */
 import React, { useState } from 'react';
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { MdClose, MdMenu } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { LOGOUT_USER } from '../store/constants';
+import { useStore } from '../store/Store';
 
 const Navbar = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { state, dispatch } = useStore();
+
+  // logout user
+  const logout = () => {
+    localStorage.removeItem('x_auth_token');
+    dispatch({ type: LOGOUT_USER });
+  };
 
   return (
     <nav className="w-full container-area text-white h-20 py-2 bg-color relative md:static flex justify-between items-center">
@@ -31,24 +41,43 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="mx-2">
-          <Link to="#" className="nav-link-styles font-montserrat">
+          <a href="#services" className="nav-link-styles font-montserrat">
             Services
-          </Link>
+          </a>
         </li>
         <li className="mx-2">
-          <Link to="#" className="nav-link-styles font-montserrat">
-            Works
-          </Link>
-        </li>
-        <li className="mx-2">
-          <Link to="#" className="nav-link-styles font-montserrat">
+          <a href="#reviews" className="nav-link-styles font-montserrat">
             Reviews
-          </Link>
+          </a>
         </li>
         <li className="mx-2">
-          <Link to="#Teams" className="nav-link-styles font-montserrat">
-            Teams
-          </Link>
+          {state.user ? (
+            <Link to="/dashboard" className="nav-link-styles font-montserrat">
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className=" bg-pink-600 hover:bg-pink-700 text-gray-100 font-semibold block md:inline-block px-5 md:py-2 md:rounded-md  font-montserrat"
+            >
+              <FaSignInAlt className="inline-block mr-1" /> Login
+            </Link>
+          )}
+        </li>
+        <li className="mx-2">
+          {state.user?.role === 'admin' && (
+            <Link to="/admin" className="nav-link-styles font-montserrat">
+              Admin
+            </Link>
+          )}
+        </li>
+        <li className="mx-2">
+          {state.user && (
+            <button onClick={logout} className="nav-link-styles flex items-center font-montserrat">
+              {' '}
+              <FaSignOutAlt className="inline-block mr-1" /> Logout
+            </button>
+          )}
         </li>
       </ul>
       <div className="text-xl md:hidden rounded-full px-2 py-1">

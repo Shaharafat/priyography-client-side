@@ -7,12 +7,22 @@
  *
  */
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { ResponseMessageBox } from '.';
 import { signupSchema } from '../helpers/schemas';
+import { SIGNIN_USER } from '../store/constants';
+import { useStore } from '../store/Store';
 
 const SignupForm = () => {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const { dispatch } = useStore();
+  const history = useHistory();
+
   // setting up yup
   const {
     register,
@@ -23,14 +33,52 @@ const SignupForm = () => {
     resolver: yupResolver(signupSchema),
   });
 
-  const submitSignupForm = () => {
-    console.log('submitted');
+  const submitSignupForm = async (data) => {
+    const { firstName, lastName, username, email, password } = data;
+
+    // make request to server to register user
+    try {
+      const response = await axios.post('/users/register', {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+      });
+      // if success get token
+      const { success, token } = response.data;
+      if (success) {
+        // show success message
+        setSuccessMessage('Registration Successful.');
+        // set token to local storage
+        localStorage.setItem('x_auth_token', 'Bearer' + ' ' + token);
+        // get user data and set to state
+        const { user } = jwt_decode(token);
+        dispatch({ type: SIGNIN_USER, payload: { user } });
+        history.push('/');
+      }
+    } catch (error) {
+      // show error message
+      setErrorMessage(error.response?.data?.message);
+    }
   };
 
   return (
     <div className="h-min-nav container-area grid place-items-center bg-color">
       <div className="fr-color w-full md:w-2/3 lg:w-1/3 p-3 rounded-md">
-        <h1 className="text-green-300 font-montserrat text-2xl font-bold">Signup</h1>
+        <h1 className="text-green-300 font-montserrat text-2xl font-bold mb-2">Signup</h1>
+        {/* success message */}
+        {successMessage && (
+          <ResponseMessageBox
+            isSuccess={true}
+            message={successMessage}
+            handler={setSuccessMessage}
+          />
+        )}
+        {/* error message */}
+        {errorMessage && (
+          <ResponseMessageBox isSuccess={false} message={errorMessage} handler={setErrorMessage} />
+        )}
         <form className="mt-6" onSubmit={handleSubmit(submitSignupForm)}>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div>

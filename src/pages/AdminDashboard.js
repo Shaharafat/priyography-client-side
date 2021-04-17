@@ -7,9 +7,10 @@
  *
  */
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { AdminPanel } from '.';
 import { AddService, AdminDashboardNav, ManageServices, OrderList, UserList } from '../components';
+import AdminRoute from '../routes/AdminRoute';
 
 const AdminDashboard = () => {
   return (
@@ -17,11 +18,11 @@ const AdminDashboard = () => {
       <AdminDashboardNav />
       <div className="flex-grow">
         <Switch>
-          <Route path="/admin" exact component={AdminPanel} />
-          <Route path={`/admin/users`} component={UserList} />
-          <Route path={`/admin/orders`} component={OrderList} />
-          <Route path={`/admin/addService`} component={AddService} />
-          <Route path={`/admin/manageServices`} component={ManageServices} />
+          <AdminRoute path="/admin" exact component={AdminPanel} />
+          <AdminRoute path="/admin/users" component={UserList} />
+          <AdminRoute path="/admin/orders" component={OrderList} />
+          <AdminRoute path="/admin/addService" component={AddService} />
+          <AdminRoute path="/admin/manageServices" component={ManageServices} />
         </Switch>
       </div>
     </div>

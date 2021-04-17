@@ -1,16 +1,16 @@
 /*
  *
- * Title: private route
- * Description: private route. check user authorized or not
+ * Title: Admin Route
+ * Description: Admin Route protected for admin
  * Author: Shah Arafat
- * Date: 15-04-2021
+ * Date: 17-04-2021
  *
  */
 import React from 'react';
 import { Redirect, Route } from 'react-router';
 import { useStore } from '../store/Store';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const AdminRoute = ({ component: Component, ...rest }) => {
   const { state } = useStore();
   console.log(state);
 
@@ -18,7 +18,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) =>
-        state.user ? (
+        state.user?.role === 'admin' ? (
           <Component />
         ) : (
           <Redirect to={{ pathname: '/login', state: { from: location } }} />
@@ -28,4 +28,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-export default PrivateRoute;
+export default AdminRoute;
