@@ -1,4 +1,4 @@
-import { UPDATE_USER_ROLE } from './constants';
+import { GET_ALL_USERS, UPDATE_USER_ROLE } from './constants';
 
 /*
  *
@@ -9,11 +9,13 @@ import { UPDATE_USER_ROLE } from './constants';
  *
  */
 export const updateUserRoleOnStore = (id, role, state, dispatch) => {
-  console.log(id, role, state, 'before');
   const updateList = {
     users: state.users.map((user) => (user._id === id ? { ...user, role: role } : user)),
   };
 
   dispatch({ type: UPDATE_USER_ROLE, payload: { users: updateList.users } });
-  console.log(id, role, state, 'after');
+};
+
+export const storeAllUser = (users, dispatch) => {
+  dispatch({ type: GET_ALL_USERS, payload: { users } });
 };

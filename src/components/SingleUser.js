@@ -25,7 +25,6 @@ const SingleUser = ({ user, setSuccess, setError }) => {
 
   // update user when update button clicks
   const updateUser = async (id, role) => {
-    console.log('updating');
     try {
       const response = await axios.patch(
         `/users/updateRole/${id}`,
@@ -36,16 +35,16 @@ const SingleUser = ({ user, setSuccess, setError }) => {
           headers: { x_auth_token: localStorage.getItem('x_auth_token') },
         }
       );
-      console.log('updated');
 
-      updateUserRoleOnStore(id, role, state, dispatch);
       const { success, message } = response.data;
-      console.log(role);
       // set success message
       if (success) {
         setSuccess(message);
         setShowUpdateButton(false);
       }
+
+      // update on store
+      updateUserRoleOnStore(id, role, state, dispatch);
     } catch (error) {
       // set error message
       setError(error.response?.data?.message);

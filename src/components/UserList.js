@@ -9,7 +9,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ResponseMessageBox, SingleUser } from '.';
-import { GET_ALL_USERS, LOADING_END, LOADING_START } from '../store/constants';
+import { storeAllUser } from '../store/actions';
+import { LOADING_END, LOADING_START } from '../store/constants';
 import { useStore } from '../store/Store';
 
 const UserList = () => {
@@ -27,7 +28,7 @@ const UserList = () => {
       const { success, users } = response.data;
       if (success) {
         // update store
-        dispatch({ type: GET_ALL_USERS, payload: { users } });
+        storeAllUser(users, dispatch);
       }
     } catch (error) {
       setErrorMessage(error.response?.data?.message);
