@@ -2,7 +2,7 @@
   "name": "frontend-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000",
+  "proxy": "https://evening-lowlands-12996.herokuapp.com",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@hookform/resolvers": "^2.3.1",

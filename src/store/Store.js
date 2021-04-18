@@ -38,6 +38,7 @@ export const StoreProvider = ({ children }) => {
       }
     } else {
       localStorage.clear();
+      dispatch({ type: LOADING_END });
     }
   }, []);
 
