@@ -3,6 +3,7 @@ import AddServiceForm from './AddServiceForm';
 import AdminDashboardNav from './AdminDashboardNav';
 import Banner from './Banner';
 import Checkout from './Checkout';
+import CheckoutForm from './CheckoutForm';
 import ConfirmOrder from './ConfirmOrder';
 import CustomerDashboardNav from './CustomerDashboardNav';
 import Footer from './Footer';
@@ -57,5 +58,6 @@ export {
   ReviewCard,
   Footer,
   ConfirmOrder,
-  Checkout
+  Checkout,
+  CheckoutForm
 };
