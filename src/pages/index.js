@@ -6,6 +6,7 @@ import ForgotPassword from './ForgotPassword';
 import Home from './Home';
 import Login from './Login';
 import Orders from './Orders';
+import PlaceOrder from './PlaceOrder';
 import ResetPassword from './ResetPassword';
 import Signup from './Signup';
 import WriteReview from './WriteReview';
@@ -21,5 +22,6 @@ export {
   Orders,
   WriteReview,
   Dashboard,
-  AdminPanel
+  AdminPanel,
+  PlaceOrder
 };

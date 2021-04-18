@@ -11,6 +11,7 @@ import {
   ADD_SINGLE_SERVICE,
   DELETE_SINGLE_SERVICE,
   GET_ALL_ORDERS,
+  GET_ALL_REVIEWS,
   GET_ALL_SERVICES,
   GET_ALL_USERS,
   GET_USERS_ORDERS,
@@ -52,6 +53,10 @@ export const updateServiceAfterDeleteOnStore = (id, state, dispatch) => {
 export const updateStoreWithNewService = (service, state, dispatch) => {
   const services = [service, ...state.services];
   dispatch({ type: ADD_SINGLE_SERVICE, payload: { services } });
+};
+
+export const storeAllReviews = (reviews, dispatch) => {
+  dispatch({ type: GET_ALL_REVIEWS, payload: { reviews } });
 };
 
 export const updateStoreWithNewReview = (review, state, dispatch) => {

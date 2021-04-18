@@ -9,6 +9,7 @@
 import React from 'react';
 
 const SingleUserOrder = ({ order }) => {
+  // destructure data
   const {
     _id: id,
     status,

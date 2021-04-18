@@ -7,7 +7,7 @@
  *
  */
 import React from 'react';
-import { FaRegCommentAlt, FaShoppingCart, FaHome } from 'react-icons/fa';
+import { FaHome, FaRegCommentAlt, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const CustomerDashboardNav = () => {

@@ -7,6 +7,7 @@ import {
   ForgotPassword,
   Home,
   Login,
+  PlaceOrder,
   ResetPassword,
   Signup
 } from './pages';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/resetPassword" component={ResetPassword} />
           <AdminRoute path="/admin" component={AdminDashboard} />
           <PrivateRoute path="/dashboard" component={CustomerDashboard} />
+          <PrivateRoute path="/placeorder/:serviceId" component={PlaceOrder} />
         </Switch>
       </Router>
     </StoreProvider>

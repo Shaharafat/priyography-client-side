@@ -7,7 +7,7 @@
  *
  */
 import React from 'react';
-import { Banner, Navbar } from '../components';
+import { Banner, Footer, Navbar, OurWorks, Reviews, Services, Teams } from '../components';
 import { useStore } from '../store/Store';
 
 const Home = () => {
@@ -17,6 +17,11 @@ const Home = () => {
     <div>
       <Navbar />
       <Banner />
+      <Services />
+      <OurWorks />
+      <Teams />
+      <Reviews />
+      <Footer />
     </div>
   );
 };
