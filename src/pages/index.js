@@ -4,6 +4,7 @@ import CustomerDashboard from './CustomerDashboard';
 import Dashboard from './Dashboard';
 import ForgotPassword from './ForgotPassword';
 import Home from './Home';
+import Loader from './Loader';
 import Login from './Login';
 import Orders from './Orders';
 import PlaceOrder from './PlaceOrder';
@@ -23,5 +24,6 @@ export {
   WriteReview,
   Dashboard,
   AdminPanel,
-  PlaceOrder
+  PlaceOrder,
+  Loader
 };

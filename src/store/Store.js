@@ -9,6 +9,7 @@
 
 import jwt_decode from 'jwt-decode';
 import { createContext, useContext, useEffect, useReducer } from 'react';
+import { Loader } from '../pages';
 import { LOADING_END, SIGNIN_USER } from './constants';
 import { initialState, reducer } from './reducer';
 
@@ -48,9 +49,6 @@ export const StoreProvider = ({ children }) => {
   };
 
   return (
-    <Store.Provider value={storeValue}>
-      {!state.loading ? children : <p>Loading...</p>}
-      {/* {children} */}
-    </Store.Provider>
+    <Store.Provider value={storeValue}>{!state.loading ? children : <Loader />}</Store.Provider>
   );
 };
