@@ -19,9 +19,12 @@ const SingleServiceDashboard = ({ service, setSuccess, setError }) => {
   // update order status
   const deleteService = async (id) => {
     try {
-      const response = await axios.delete(`/services/delete/${id}`, {
-        headers: { x_auth_token: localStorage.getItem('x_auth_token') }
-      });
+      const response = await axios.delete(
+        `${process.env.REACT_APP_SERVER_URL}/services/delete/${id}`,
+        {
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') }
+        }
+      );
 
       const { success, message } = response.data;
       // set success message

@@ -17,15 +17,16 @@ const Orders = () => {
   const { state, dispatch } = useStore();
 
   const fetchUserOrder = async () => {
-    console.log(state.user);
     try {
-      const response = await axios.get(`/orders/${state.user.id}`, {
-        headers: { x_auth_token: localStorage.getItem('x_auth_token') }
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/orders/${state.user.id}`,
+        {
+          headers: { x_auth_token: localStorage.getItem('x_auth_token') }
+        }
+      );
 
       const { success, orders } = response.data;
       if (success) {
-        console.log(orders);
         // update store
         storeUserOrders(orders, dispatch);
       }
@@ -37,7 +38,6 @@ const Orders = () => {
     dispatch({ type: LOADING_START });
     fetchUserOrder();
     dispatch({ type: LOADING_END });
-    console.log(state);
   }, []);
 
   return (

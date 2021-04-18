@@ -18,7 +18,7 @@ const Services = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get('/services');
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/services`);
 
       const { success, services } = response.data;
       if (success) {
@@ -35,11 +35,10 @@ const Services = () => {
     dispatch({ type: LOADING_START });
     fetchServices();
     dispatch({ type: LOADING_END });
-    console.log(state.services);
   }, []);
 
   return (
-    <div className="container-area fr-color py-12">
+    <div id="services" className="container-area fr-color py-12">
       <h1 className="text-center text-gray-100 text-4xl font-bold pt-8 font-passion-one">
         OUR PACKAGES
       </h1>

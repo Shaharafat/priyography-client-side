@@ -51,7 +51,7 @@ const CheckoutForm = ({ date, id, setError, setSuccess }) => {
   const placeOrder = async (service, eventDate, cardNo) => {
     try {
       const response = await axios.post(
-        '/orders/placeOrder',
+        `${process.env.REACT_APP_SERVER_URL}/orders/placeOrder`,
         {
           eventDate,
           cardNo,

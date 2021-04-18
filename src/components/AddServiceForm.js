@@ -41,7 +41,7 @@ const AddServiceForm = () => {
     // axios request
     try {
       const response = await axios.post(
-        '/services/addService',
+        `${process.env.REACT_APP_SERVER_URL}/services/addService`,
         {
           name,
           price,
@@ -87,7 +87,7 @@ const AddServiceForm = () => {
       // will goto cloudinary from here.
       try {
         const response = await axios.post(
-          '/services/uploadImage',
+          `${process.env.REACT_APP_SERVER_URL}/services/uploadImage`,
           {
             imageBlob
           },

@@ -38,7 +38,7 @@ const SignupForm = () => {
 
     // make request to server to register user
     try {
-      const response = await axios.post('/users/register', {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, {
         firstName,
         lastName,
         username,

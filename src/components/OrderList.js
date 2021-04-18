@@ -22,7 +22,7 @@ const OrderList = () => {
   // get all users from server
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('/orders', {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders`, {
         headers: { x_auth_token: localStorage.getItem('x_auth_token') }
       });
 

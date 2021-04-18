@@ -38,7 +38,7 @@ const SingleOrder = ({ order, setSuccess, setError }) => {
   const updateOrderStatus = async (id, status) => {
     try {
       const response = await axios.patch(
-        `/orders/changeStatus/${id}`,
+        `${process.env.REACT_APP_SERVER_URL}/orders/changeStatus/${id}`,
         {
           status
         },

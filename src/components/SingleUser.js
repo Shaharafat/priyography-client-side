@@ -27,7 +27,7 @@ const SingleUser = ({ user, setSuccess, setError }) => {
   const updateUser = async (id, role) => {
     try {
       const response = await axios.patch(
-        `/users/updateRole/${id}`,
+        `${process.env.REACT_APP_SERVER_URL}/users/updateRole/${id}`,
         {
           role
         },

@@ -7,7 +7,7 @@
  *
  */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ResponseMessageBox, SingleUser } from '.';
 import { storeAllUser } from '../store/actions';
 import { LOADING_END, LOADING_START } from '../store/constants';
@@ -21,7 +21,7 @@ const UserList = () => {
   // get all users from server
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('/users', {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`, {
         headers: { x_auth_token: localStorage.getItem('x_auth_token') }
       });
 

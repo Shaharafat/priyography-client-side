@@ -18,7 +18,7 @@ const Reviews = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get('/reviews');
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/reviews`);
       const { success, reviews } = response.data;
 
       if (success) {
@@ -36,11 +36,10 @@ const Reviews = () => {
     dispatch({ type: LOADING_START });
     fetchReviews();
     dispatch({ type: LOADING_END });
-    console.log(state);
   }, []);
 
   return (
-    <div className="container-area bg-color py-12">
+    <div id="reviews" className="container-area bg-color py-12">
       <h1 className="text-center text-gray-100 text-4xl font-bold pt-8 font-passion-one">
         Reviews
       </h1>

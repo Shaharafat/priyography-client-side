@@ -21,7 +21,7 @@ const ManageServices = () => {
   // get all users from server
   const fetchServices = async () => {
     try {
-      const response = await axios.get('/services');
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/services`);
 
       const { success, services } = response.data;
       if (success) {
@@ -38,7 +38,6 @@ const ManageServices = () => {
     dispatch({ type: LOADING_START });
     fetchServices();
     dispatch({ type: LOADING_END });
-    console.log(state.services);
   }, []);
 
   return (

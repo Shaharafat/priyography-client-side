@@ -25,7 +25,9 @@ const ConfirmOrder = ({ id, setDate, setShowPaymentMethod }) => {
     setShowConfirmButton(false);
 
     try {
-      const response = await axios.post('/orders/date', { date });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/date`, {
+        date
+      });
       const { success } = response.data;
       if (success) {
         setShowConfirmButton(true);
@@ -39,7 +41,7 @@ const ConfirmOrder = ({ id, setDate, setShowPaymentMethod }) => {
   // get order matched to id
   const fetchOrder = async () => {
     try {
-      const response = await axios.get(`/services/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/services/${id}`);
       const { success, service } = response.data;
       if (success) {
         setServiceData(service);

@@ -36,7 +36,7 @@ const WriteReviewForm = () => {
 
     try {
       const response = await axios.post(
-        '/reviews/add',
+        `${process.env.REACT_APP_SERVER_URL}/reviews/add`,
         {
           reviewText,
           stars

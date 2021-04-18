@@ -11,7 +11,6 @@ import { FaStar } from 'react-icons/fa';
 
 const ReviewCard = ({ userName, reviewText, stars }) => {
   const arr = [1, 2, 3, 4, 5];
-  console.log(arr);
   return (
     <div className="fr-color shadow-xl p-4 rounded-md flex flex-col items-center">
       <h1 className="mt-2 text-gray-300 text-lg">{reviewText}</h1>

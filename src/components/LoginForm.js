@@ -39,7 +39,10 @@ const LoginForm = () => {
     const { email, password } = data;
     // try login
     try {
-      const response = await axios.post('/users/login', { email, password });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, {
+        email,
+        password
+      });
       const { success, token } = response.data;
       if (success) {
         // show success message

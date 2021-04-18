@@ -11,7 +11,7 @@ import images from '../helpers/worksData';
 
 const OurWorks = () => {
   return (
-    <div className="container-area bg-color py-12">
+    <div id="" className="container-area bg-color py-12">
       <h1 className="text-center text-gray-100 text-4xl font-bold pt-8 font-passion-one">
         OUR WORKS
       </h1>

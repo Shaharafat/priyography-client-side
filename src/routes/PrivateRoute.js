@@ -12,7 +12,6 @@ import { useStore } from '../store/Store';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { state } = useStore();
-  console.log(state);
 
   return (
     <Route
